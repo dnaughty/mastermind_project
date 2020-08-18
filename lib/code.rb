@@ -45,7 +45,19 @@ class Code
     (0...guess.length).count { |i| guess[i] == @pegs[i] }
   end
 
+  def num_near_matches(guess_code)
+    num_matches = (0...guess_code.length).count do |i|
+      guess_peg = guess_code[i]
+      @pegs.include?(guess_peg)
+    end
+
+    num_matches - self.num_exact_matches(guess_code)
+  end
+
   def ==(code)
+    
+
+
 
   end
 
