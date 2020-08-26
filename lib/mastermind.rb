@@ -9,6 +9,8 @@ class Mastermind
 
     def print_matches(inst)
 
+        print num_exact_matches(inst)
+
     end
 
     def ask_user_for_guess

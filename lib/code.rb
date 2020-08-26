@@ -1,6 +1,7 @@
 class Code
 
   attr_accessor :pegs
+
   POSSIBLE_PEGS = {
     "R" => :red,
     "G" => :green,
@@ -9,24 +10,31 @@ class Code
   }
 
   def self.valid_pegs?(arr)
-    arr.map! { |x| x.upcase}
-    arr.each { |x| return false if !POSSIBLE_PEGS.include?(x) }
+    # arr.map! { |x| x.upcase}
+    # arr.each { |x| return false if !POSSIBLE_PEGS.include?(x) }
         
-    return true
+    # return true
+
+    arr.all? { |arrs| POSSIBLE_PEGS.has_key?(arrs.upcase)}
   end
 
   def initialize(arr)
     @arr = arr
     if Code.valid_pegs?(arr)
-      @pegs = arr
+      @pegs = arr.map(&:upcase)
     else
       raise "exception"
     end
   end
 
   def self.random(len)
-    pegs = Array.new(len) { Code::POSSIBLE_PEGS.keys.sample}
-    Code.new(pegs)
+    # pegs = Array.new(len) { Code::POSSIBLE_PEGS.keys.sample}
+    # Code.new(pegs)
+
+    random_pegs = []
+
+    len.times { random_pegs  << POSSIBLE_PEGS.keys.sample}
+    Code.new(random_pegs)
   end
 
   def self.from_string(string)
@@ -43,6 +51,8 @@ class Code
 
   def num_exact_matches(guess)
     (0...guess.length).count { |i| guess[i] == @pegs[i] }
+
+  
   end
 
   def num_near_matches(guess_code)
@@ -55,6 +65,18 @@ class Code
   end
 
   def ==(code)
+    #return false if code.length != self.length
+
+    self.pegs == code.pegs
+
+
+    # if code == self
+    #   return true
+    # else
+    #   return false
+    # end
+
+    
     
 
 
