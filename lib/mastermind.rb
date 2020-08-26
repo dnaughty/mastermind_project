@@ -9,15 +9,18 @@ class Mastermind
 
     def print_matches(inst)
 
-        print num_exact_matches(inst)
+        puts @secret_code.num_exact_matches(inst)
 
+        puts @secret_code.num_near_matches(inst)
     end
 
     def ask_user_for_guess
         print 'Enter a code'
-        input = gets.chomp
+        guess = Code.from_string(gets.chomp)
 
+        self.print_matches(guess)
 
+        @secret_code == guess
     end
 
 
